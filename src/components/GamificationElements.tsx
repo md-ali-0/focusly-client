@@ -21,7 +21,7 @@ export default function GamificationElements() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
+                Authorization: token,
             },
             cache: "no-store",
         });
