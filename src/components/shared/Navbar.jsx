@@ -28,8 +28,8 @@ const Navbar = () => {
     };
 
     return (
-        <div className=" h-16 py-3 bg-white border-b">
-            <div className="container flex items-center justify-between mx-auto px-4">
+        <div className="container mx-auto px-4 pt-3">
+            <div className="flex items-center justify-between h-16 py-3 px-6 rounded-lg bg-white border">
                 <div className="flex items-center space-x-2">
                     <Image alt="Focusly" src={'/logo.png'} width={500} height={100} className="w-24"/>
                 </div>

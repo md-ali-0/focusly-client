@@ -1,4 +1,3 @@
-import { Shop } from "./Shop";
 
 export type Vendor = {
     id: string;
@@ -13,15 +12,7 @@ export type User = {
     password: string;
     name: string;
     avatar: string;
-    phone?: string;
-    city?: string;
-    state?: string;
-    zip_code?: string;
-    address?: string;
-    country?: string;
     role: Role;
-    shop: Shop;
-    followedShops: Shop[]
     status: UserStatus;
     createdAt: Date;
     updatedAt: Date;
@@ -34,6 +25,5 @@ export enum UserStatus {
 
 enum Role {
     ADMIN,
-    VENDOR,
     USER,
 }

@@ -1,36 +1,41 @@
 "use client";
 
 import config from "@/config";
-import {
-    AwaitedReactNode,
-    JSXElementConstructor,
-    Key,
-    ReactElement,
-    ReactNode,
-    ReactPortal,
-} from "react";
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 
 export default function GamificationElements() {
+    const [token, setToken] = useState<string>("");
+
+    useEffect(() => {
+        const storedToken = localStorage.getItem("token") || "";
+        setToken(storedToken);
+    }, []);
+
     const {
-        data: streaks,
+        data: gamificationData,
         isLoading,
         error,
     } = useQuery("streaks", async () => {
-        const res = await fetch(
-            `${config.host}/api/focus-metric/daily-metrics`
-        );
+        const res = await fetch(`${config.host}/api/streaks`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            cache: "no-store",
+        });
         const result = await res.json();
         return result.data;
     });
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching streaks</div>;
+    if (error) return <div>Error fetching gamification data</div>;
 
-    const { currentStreak, longestStreak, badges } = streaks || {};
+    const { currentStreak, longestStreak, badges } = gamificationData || {};
 
     return (
-        <div className="mt-8 bg-white p-6 rounded-lg border">
+        <div className="bg-white p-6 rounded-lg border">
             <h2 className="text-2xl font-semibold mb-4">Your Achievements</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
@@ -48,33 +53,14 @@ export default function GamificationElements() {
                 <div>
                     <h3 className="text-lg font-medium mb-2">Badges</h3>
                     <div className="flex flex-wrap gap-2">
-                        {badges?.map(
-                            (
-                                badge:
-                                    | string
-                                    | number
-                                    | bigint
-                                    | boolean
-                                    | ReactElement<
-                                          unknown,
-                                          | string
-                                          | JSXElementConstructor<unknown>
-                                      >
-                                    | Iterable<ReactNode>
-                                    | ReactPortal
-                                    | Promise<AwaitedReactNode>
-                                    | null
-                                    | undefined,
-                                index: Key | null | undefined
-                            ) => (
-                                <span
-                                    key={index}
-                                    className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm"
-                                >
-                                    {badge}
-                                </span>
-                            )
-                        )}
+                        {badges?.map((badge: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<unknown>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined, index: Key | null | undefined) => (
+                            <span
+                                key={index}
+                                className="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm"
+                            >
+                                {badge}
+                            </span>
+                        ))}
                     </div>
                 </div>
             </div>

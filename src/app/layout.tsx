@@ -1,4 +1,5 @@
 import { Providers } from "@/providers/provider";
+import ReduxProvider from "@/providers/redux-provider"; // Static import
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -15,7 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className="antialiased">
-                <Providers>{children}</Providers>
+                <Providers>
+                    <ReduxProvider>{children}</ReduxProvider>
+                </Providers>
             </body>
         </html>
     );
