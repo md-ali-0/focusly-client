@@ -30,7 +30,7 @@ export default function GamificationElements() {
     const { currentStreak, longestStreak, badges } = streaks || {};
 
     return (
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
+        <div className="mt-8 bg-white p-6 rounded-lg border">
             <h2 className="text-2xl font-semibold mb-4">Your Achievements</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>

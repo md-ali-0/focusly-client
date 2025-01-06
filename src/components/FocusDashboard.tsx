@@ -39,7 +39,7 @@ export default function FocusDashboard() {
     const totalSessions = metrics?.weekly.totalSessions || 0;
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg border">
             <h2 className="text-2xl font-semibold mb-4">Focus Dashboard</h2>
             <div className="mb-6">
                 <p className="text-lg font-medium">Weekly Summary</p>

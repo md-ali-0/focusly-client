@@ -50,7 +50,7 @@ export default function PomodoroTimer() {
   }
 
   const playNotificationSound = () => {
-    const audio = new Audio('/notification.mp3')
+    const audio = new Audio('/notification.wav')
     audio.play()
   }
 
@@ -61,7 +61,7 @@ export default function PomodoroTimer() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg border">
       <h2 className="text-2xl font-semibold mb-4">Pomodoro Timer</h2>
       <div className="text-6xl font-bold mb-6 text-center">{formatTime(time)}</div>
       <div className="flex justify-center space-x-4 mb-6">
