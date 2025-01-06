@@ -27,6 +27,8 @@ export default function GamificationElements() {
         });
         const result = await res.json();
         return result.data;
+    }, {
+        enabled: !!token
     });
 
     if (isLoading) return <div>Loading...</div>;
